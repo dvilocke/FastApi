@@ -111,7 +111,29 @@ Con lo anterior mencionado, Request Body viene a ser el cuerpo (body) de una sol
 Response Body
 Con lo anterior mencionado, Response Body viene a ser el cuerpo (body) de una respuesta del servidor al cliente.
 
-    
+
+***** Modelos
+
+Los modelos son la representación de una entidad en código, una entidad es un objeto de la vida real, que tiene ciertos atributos. Por ejemplo:
+
+Carro: color, motor, año, marca
+Persona: edad, nombres, apellidos, altura
+Para poder crear modelos en el código se utiliza la librería Pydantic, importando la clase BaseModel:
+
+
+con BaseModel voy hacer capaz de crear modelos en fastAPi
+
+person : Person = Body(...) -> esto es un parametro de tipo Body, que es obligatorio
+
+lo que quiere decir esto es que la persona que ese usando esta API va a tener que enviarle al servidor
+un archivo json con la información del modelo que usamos
+
+
+**** Validaciones: Query Parameters:
+Las validaciones tal como se definen, nos sirven para comprobar si son correctos los parámetros entregados en cada una 
+de las peticiones. Estas validaciones funcionan restringiendo o indicando el formato de entrega en cada una de 
+las peticiones.
+
 """
 
 
