@@ -187,6 +187,9 @@ def show_person(
 	        description="El ID se consigue entrando a las configuraciones del perfil");
 	        
 Nota : si dos path son iguales, el toma el ultimo que se leyo
+
+en la trasferencia de datos  entre un cliente y un servidor usando API, ya vimos que tenemos 3 formas de lograr este
+objetivo, queryparameters, path parameters, request body
         
 """
 
