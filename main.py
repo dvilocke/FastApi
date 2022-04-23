@@ -1,10 +1,13 @@
 #Python
 
 from typing import Optional
+#nos permite crear enumeraciones de string
+from enum import Enum
 
 #Pydantic -> Pydantic es una libreria que esta por debajo de FastApi, por eso se importa primero
 
 from pydantic import BaseModel
+from pydantic import  Field
 
 #FastAPI
 from fastapi import FastAPI
@@ -12,14 +15,24 @@ from fastapi import Body, Query, Path
 
 app = FastAPI()
 
+class HairColor(Enum):
+    white =  'white'
+    brown = 'brown'
+    black = 'black'
+    blonde = 'blonde'
+    red = 'red'
+
 # Models
 #quiere decir que nos debe enviar un json en ese formato, con esos campos
 class Person(BaseModel):
-    first_name : str
-    last_name : str
-    age : int
-    hair_color : Optional[str] = None
-    is_married : Optional[bool] = None
+    first_name : str = Field(..., min_length=1, max_length=50)
+    last_name : str = Field(..., min_length=1, max_length=50)
+    age : int = Field(..., gt=0, le=115)
+    # como hacer que el hair color este limitado algunas opciones, pues con la clase Enum
+    hair_color : Optional[HairColor] = Field(default = None)
+    #hair_color : Optional[str] = None
+    #is_married : Optional[bool] = None
+    is_married : Optional[str] = Field(default=None)
 
 class Location(BaseModel):
     city : str
@@ -105,6 +118,8 @@ def update_person(
 ):
     results = person.dict() | location.dict()
     return results
+
+
 
 
 

@@ -190,7 +190,34 @@ Nota : si dos path son iguales, el toma el ultimo que se leyo
 
 en la trasferencia de datos  entre un cliente y un servidor usando API, ya vimos que tenemos 3 formas de lograr este
 objetivo, queryparameters, path parameters, request body
-        
+
+
+                        ----------validaciones : Models ------------------------
+                        
+                        from pydantic import  Field, es muy parecido a Body, Query y Path
+                        me permite validar cada uno de los campos de los modelos, super !! :D
+                        from enum import Enum 
+                        nos permite crear enumeraciones de string
+                        
+        podemos tener muchas validaciones para los modelos:
+            - clasicos:
+                . str
+                . int
+                . float
+                . bool
+            - Exóticos:
+                . Enum
+                . HttpURL
+                . FilePath
+                . DirectoryPath
+                . EmailStr
+                .PaymentCardNumber -> validar un numero de tarjeta
+                . IpvAnyAdress -> para validar un ip
+                . NegativeFloat -> validar si la persona nos ingreso un numero flotante negativo
+                . PositiveFloat -> validar si la persona nos ingreso un numero flotante positivo
+                . NegativeInt
+            
+        link : https://pydantic-docs.helpmanual.io/usage/types/#pydantic-types        
 """
 
 
