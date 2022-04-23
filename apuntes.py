@@ -185,6 +185,8 @@ def show_person(
 	        None, 
             title="ID del usuario", 
 	        description="El ID se consigue entrando a las configuraciones del perfil");
+	        
+Nota : si dos path son iguales, el toma el ultimo que se leyo
         
 """
 
