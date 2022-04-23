@@ -217,7 +217,40 @@ objetivo, queryparameters, path parameters, request body
                 . PositiveFloat -> validar si la persona nos ingreso un numero flotante positivo
                 . NegativeInt
             
-        link : https://pydantic-docs.helpmanual.io/usage/types/#pydantic-types        
+        link : https://pydantic-docs.helpmanual.io/usage/types/#pydantic-types
+        
+*************creando ejemplos de Request Body automaticos
+
+tenemos que poner una subclase en una clase que herede de BaseModel, el nombre
+example debe ser obligatorio
+ class Config:
+        schema_extra = {
+            'example' : {
+                "first_name" : "Miguel",
+                "last_name" : "Ramirez",
+                "age": 22,
+                "hair_color": 'blonde',
+                "is_married" : False
+            }
+        }
+otra forma de hacerlo es:
+first_name : str = Field(..., min_length=1, max_length=50, example = '')
+agregar el key/value example y ponerlo ahi
+
+
+
+Nota super importante:
+    cuando nosotros tenemos un caso especial en el que combinamos dos request body en una sola path
+    operation  FastApi , mas bien swaguer UI no es capas de cargar los ejemplos que defininimos
+    que ya estan definidos en opeAPI, pero swaguer Ui como en el pasado no soportaba el title
+    de los query paramters tampoco nos va a soportar los ejemplos cuando tenemos varios 
+    request body, es raro que enviemos 2 request body en un solo path operation
+    
+
+*************creando ejemplos de Path y Query Parameters autmaticos
+
+
+    
 """
 
 

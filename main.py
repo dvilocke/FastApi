@@ -34,6 +34,21 @@ class Person(BaseModel):
     #is_married : Optional[bool] = None
     is_married : Optional[str] = Field(default=None)
 
+
+    #Una forma de hacerlo
+
+    class Config:
+        schema_extra = {
+            'example' : {
+                "first_name" : "Miguel",
+                "last_name" : "Ramirez",
+                "age": 22,
+                "hair_color": 'blonde',
+                "is_married" : False
+            }
+        }
+
+
 class Location(BaseModel):
     city : str
     state : str
