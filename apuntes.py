@@ -101,7 +101,8 @@ PUT /users/{user_id}/details?age=20&height=184
 
 **** Request Body y Response Body
 
-Debes saber que bajo el protocolo HTTP existe una comunicación entre el usuario y el servidor. Esta comunicación está compuesta por cabeceras (headers) y un cuerpo (body). Por lo mismo, se tienen dos direcciones en la comunicación entre el cliente y el servidor y definen de la siguiente manera:
+Debes saber que bajo el protocolo HTTP existe una comunicación entre el usuario y el servidor. Esta comunicación está compuesta por cabeceras (headers) y 
+un cuerpo (body). Por lo mismo, se tienen dos direcciones en la comunicación entre el cliente y el servidor y definen de la siguiente manera:
 
 Request : Cuando el cliente solicita/pide datos al servidor.
 Response : Cuando el servidor responde al cliente.
@@ -134,6 +135,57 @@ Las validaciones tal como se definen, nos sirven para comprobar si son correctos
 de las peticiones. Estas validaciones funcionan restringiendo o indicando el formato de entrega en cada una de 
 las peticiones.
 
+@app.get('/person/detail')
+def show_person(
+        name : Optional[str] = Query(None, min_length=1, max_length=50),
+        age : Optional[str] = Query(None)
+):
+    return {
+        name : age
+    }
+    
+asi es la forma en que yo puedo crear Query parameters, ya que como se puede observar en el codigo anterior estoy 
+haciendo uso del Objeto Query, lo pongo Optional porque recuerden que un Query parameter es optional, por lo tanto
+toma el valor de None, otra cosa a tener en cuenta es que puedo tener mas validaciones, como min_length=1, max_length=50
+
+existe la posibilidad que un query parameter sea obligatorio, no es una buena practica, porque si se quiere que sea
+obligatorio se usa path parameter, pero puede existir esa posibilidad, la forma de hacerlo es:
+
+@app.get('/person/detail')
+def show_person(
+        name : Optional[str] = Query(None, min_length=1, max_length=50),
+        age : str = Query(...)
+):
+    return {
+        name : age
+    }
+    
+----- Mas parametros que puedes usar en la clase Query(Validations):
+
+                                String
+                                
+        * max_length  -> cantidad maxima de caracteres que voy a permitir
+        * min_length  -> cantidad minima de caracteres que voy a permitir
+        * regex -> permite evaluar una regular expresion, para especificar expresiones regulares
+        
+                                Numeros
+                                
+        * ge -> greater or equal than -> Para especificar que el valor debe ser mayor o igual
+        * le -> less or equal than -> para especificar que el valor debe ser menor o igual
+        * gt -> greater Than -> Para especificar que el valor debe ser mayor 
+        * lt -> less than -> para especificar que el valor debe ser menor
+        
+                                Es posible dotar de mayor contexto a nuestra documentacion, se deben
+                                usar los parámetros title y description
+                                
+        *title -> para definir un titulo al parámetro
+        * description -> para especificar una descripcion al parametro
+        
+        Query(
+	        None, 
+            title="ID del usuario", 
+	        description="El ID se consigue entrando a las configuraciones del perfil");
+        
 """
 
 

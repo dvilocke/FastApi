@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 #FastAPI
 from fastapi import FastAPI
-from fastapi import Body
+from fastapi import Body, Query
 
 app = FastAPI()
 
@@ -35,10 +35,22 @@ def tweets(tweet_id):
     }
 
 # Request and Response Body
-
 @app.post('/person/new/')
 def create_person(person : Person = Body(...)):
     return person
+
+# Validaciones : Query
+
+@app.get('/person/detail')
+def show_person(
+        name : Optional[str] = Query(None, min_length=1, max_length=50),
+        age : str = Query(...)
+):
+    return {
+        name : age
+    }
+
+
 
 
 
