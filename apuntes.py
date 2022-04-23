@@ -249,7 +249,25 @@ Nota super importante:
 
 *************creando ejemplos de Path y Query Parameters autmaticos
 
+las clases Query y Path tienen exactamente example
 
+name : Optional[str] = Query(
+            None,
+            min_length=1,
+            max_length=50,
+            title= 'Person Name',
+            description='This is the person name',
+            example = ''
+        ),
+        age : str = Que
+        
+person_id : int = Path(
+            ...,
+            gt=0,
+            title= 'Person Id',
+            description= 'Person Id required',
+            example=''
+        )
     
 """
 
